@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Application extends PApplet {
 
     ArrayList<Shape2D> entities;
-    Shape2D walls[];
 
     @Override
     public void settings() { 
@@ -39,10 +38,6 @@ public class Application extends PApplet {
         scale(camera.z);
 
         entities.forEach(e -> e.show());
-        
-        for (Shape2D wall : walls)
-        if (wall != null)
-            wall.show();
     }
 
 
