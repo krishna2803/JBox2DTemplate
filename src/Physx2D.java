@@ -143,7 +143,7 @@ public abstract class Physx2D {
      * @param body
      * @return
      */
-    public Vec2 pos(Body body) {
+    public static Vec2 pos(Body body) {
         return pixels(body.getTransform().p);
     }
 
@@ -165,7 +165,7 @@ public abstract class Physx2D {
      * @param v screen vector 
      * @return world coordinate vector
      */
-    public Vec2 world(Vec2 v) { 
+    public static Vec2 world(Vec2 v) { 
         return world(v.x, v.y);
     }
 
@@ -175,7 +175,7 @@ public abstract class Physx2D {
      * @param y
      * @return world coordinate vector
      */
-    public Vec2 pixels(float x, float y) {
+    public static Vec2 pixels(float x, float y) {
 		return new Vec2(
             map(x, 0.0f, 1.0f, translate.x, translate.x + scale),
             map(map(y, 0.0f, 1.0f, translate.y, translate.y + scale), 0.0f, parent.height, parent.height, 0.0f)
@@ -187,7 +187,7 @@ public abstract class Physx2D {
      * @param v screen vector 
      * @return pixel coordinate vector
      */
-    public Vec2 pixels(Vec2 v) {
+    public static Vec2 pixels(Vec2 v) {
         return pixels(v.x, v.y);
     }
 
@@ -197,7 +197,7 @@ public abstract class Physx2D {
      * @param y
      * @return world vector
      */
-    public Vec2 worldv(float x, float y) {
+    public static Vec2 worldv(float x, float y) {
 		return new Vec2(x / scale, -y / scale);
     }
 
@@ -206,7 +206,7 @@ public abstract class Physx2D {
      * @param v screen vector 
      * @return world vector
      */
-    public Vec2 worldv(Vec2 v) {
+    public static Vec2 worldv(Vec2 v) {
         return worldv(v.x, v.y);
     }
 
@@ -216,7 +216,7 @@ public abstract class Physx2D {
      * @param y
      * @return screen vector
      */
-    public Vec2 pixelsv(float x, float y) {
+    public static Vec2 pixelsv(float x, float y) {
 		return new Vec2(x * scale, -y * scale);
     }
 
@@ -226,7 +226,7 @@ public abstract class Physx2D {
      * @param v world vector
      * @return screen vector
      */
-    public Vec2 pixelsv(Vec2 v) {
+    public static Vec2 pixelsv(Vec2 v) {
         return pixels(v.x, v.y);
     }
 
@@ -235,7 +235,7 @@ public abstract class Physx2D {
      * @param x
      * @return scalar in world units
      */
-    public float world(float x) {
+    public static float world(float x) {
         return x / scale;
     }
 
@@ -244,7 +244,7 @@ public abstract class Physx2D {
      * @param x
      * @return scalar in screen units
      */
-    public float pixels(float x) {
+    public static float pixels(float x) {
         return x * scale;
     }
 
@@ -259,21 +259,41 @@ public abstract class Physx2D {
     }
     
     /**
-     * create a square box with random side at random screen position
+     * create a square box with random side at random position <b>with origin as center</b>
      * @return Box
      */
-    public Box randomBox() {
-        float s = parent.random(50, 100);
-        return new Box(parent.random(parent.width), parent.random(parent.height), s, s);
+    public static Box randomBox() {
+        float s = parent.random(25, 50);
+        Box b = new Box(parent.width/2-parent.random(parent.width), parent.height/2-parent.random(parent.height), s, s);
+        b.setLinearVelocity(
+            new Vec2(
+                parent.random(-10.0f, 10.0f),
+                parent.random(-10.0f, 10.0f)
+            )
+        );
+        b.setAngularVelocity(
+            parent.random(-5.0f, 5.0f)
+        );
+        return b;
     }
 
     /**
-     * create a circle with random radius at random screen position
+     * create a circle with random radius at random position <b>with origin as center</b>
      * @return Circle
      */
-    public Circle randomCircle() {
-        float r = parent.random(100, 125) * 0.5f;
-        return new Circle(parent.random(parent.width), parent.random(parent.height), r);
+    public static Circle randomCircle() {
+        float r = parent.random(25, 50) * 0.5f;
+        Circle c = new Circle(parent.width/2-parent.random(parent.width), parent.height/2-parent.random(parent.height), r);
+        c.setLinearVelocity(
+            new Vec2(
+                parent.random(-10.0f, 10.0f),
+                parent.random(-10.0f, 10.0f)
+            )
+        );
+        c.setAngularVelocity(
+            parent.random(-5.0f, 5.0f)
+        );
+        return c;
     }
 
     /**
