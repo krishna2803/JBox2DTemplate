@@ -15,7 +15,7 @@ public class Application extends PApplet {
     }
 
     // x, y, zoom
-    PVector camera;
+    PVector camera = new PVector(0.0f, 0.0f, 1.0f);
     float camSpeed = 6.0f;
     float zoomSenstivity = 0.05f;
 
@@ -25,8 +25,6 @@ public class Application extends PApplet {
 
         entities = new ArrayList<Shape2D>();
 
-        camera = new PVector();
-        camera.z = 1.0f;
         walls = new Wall[] {
             new Wall(0, -height/2,  width+2.5f, 5),
             new Wall(0,  height/2,  width+2.5f, 5),
