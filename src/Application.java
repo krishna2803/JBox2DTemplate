@@ -38,10 +38,10 @@ public class Application extends PApplet {
         Physx2D.step();
         background(211);
 
-        textSize(28);
+        textSize(26);
         fill(71);
         textAlign(CENTER, CENTER);
-        text("Press <space> to add shapes\nUse mouse to move the scane and mouse wheel zoom", width/2, height/2);
+        text("Press <space> to add shapes\nUse mouse to move the scene and mouse wheel to zoom", width/2, height/2);
 
         translate(camera.x + width*0.5f, camera.y + height*0.5f);
         scale(camera.z);
